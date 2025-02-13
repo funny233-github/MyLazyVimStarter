@@ -10,7 +10,7 @@ return {
       provider = "openai",
       openai = {
         endpoint = "http://localhost:11434/v1",
-        model = "llama3.2", -- your desired model (or use gpt-4o, etc.)
+        model = "deepseek-r1:8b", -- your desired model (or use gpt-4o, etc.)
         timeout = 30000, -- timeout in milliseconds
         temperature = 0, -- adjust if needed
         max_tokens = 4096,
