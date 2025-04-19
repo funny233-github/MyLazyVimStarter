@@ -14,6 +14,14 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+function get_git_url_format()
+	if os.getenv("GITFORMAT") == "git" then
+      return { url_format = "git@github.com:%s.git" }
+    else
+      return { url_format = "https://github.com/%s.git"}
+    end
+end
+
 require("lazy").setup({
   spec = {
     -- add LazyVim and import its plugins
@@ -50,7 +58,5 @@ require("lazy").setup({
       },
     },
   },
-  git = {
-    url_format = "git@github.com:%s.git",
-  },
+  git = get_git_url_format(),
 })
