@@ -14,12 +14,15 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-function get_git_url_format()
-	if os.getenv("GITFORMAT") == "git" then
-      return { url_format = "git@github.com:%s.git" }
-    else
-      return { url_format = "https://github.com/%s.git"}
-    end
+local function get_git_url_format()
+  if os.getenv("GITFORMAT") == nil then
+    return { url_format = "https://github.com/%s.git" }
+  end
+  if os.getenv("GITFORMAT") == "git" then
+    return { url_format = "git@github.com:%s.git" }
+  end
+
+  return { url_format = os.getenv("GITFORMAT") }
 end
 
 require("lazy").setup({
